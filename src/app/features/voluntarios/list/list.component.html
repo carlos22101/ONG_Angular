@@ -1,0 +1,34 @@
+<div class="container">
+    <h2>Lista de Voluntarios</h2>
+    <button routerLink="/voluntarios/add" class="btn btn-primary">Agregar Voluntario</button>
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Área de Interés</th>
+          <th>Disponibilidad</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let voluntario of voluntarios">
+          <td>{{ voluntario.id }}</td>
+          <td>{{ voluntario.nombre }} {{ voluntario.apellido }}</td>
+          <td>{{ voluntario.correo }}</td>
+          <td>{{ voluntario.areaInteres }}</td>
+          <td>{{ voluntario.disponibilidadHoraria }}</td>
+          <td>
+            <button [routerLink]="['/voluntarios/edit', voluntario.id]" class="btn btn-primary">
+              Editar
+            </button>
+            
+            <button (click)="deleteVoluntario(voluntario.id)" class="btn btn-danger">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
