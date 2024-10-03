@@ -1,39 +1,39 @@
 import { Injectable } from '@angular/core';
-import { Voluntario } from '../models/voluntario';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VoluntariosService {
-  private key = 'voluntarios';
+  private storageKey = 'voluntarios';
 
   constructor() { }
 
-  // Obtener todos los voluntarios del localStorage
-  getVoluntarios(): Voluntario[] {
-    const voluntarios = localStorage.getItem(this.key);
+  getVoluntarios() {
+    const voluntarios = localStorage.getItem(this.storageKey);
     return voluntarios ? JSON.parse(voluntarios) : [];
   }
 
-  // Agregar un nuevo voluntario
-  addVoluntario(voluntario: Voluntario): void {
+  addVoluntario(voluntario: any) {
     const voluntarios = this.getVoluntarios();
-    voluntario.id = Date.now(); // Generar un ID único
     voluntarios.push(voluntario);
-    localStorage.setItem(this.key, JSON.stringify(voluntarios));
+    localStorage.setItem(this.storageKey, JSON.stringify(voluntarios));
   }
 
-  // Actualizar un voluntario existente
-  updateVoluntario(voluntario: Voluntario): void {
-    let voluntarios = this.getVoluntarios();
-    voluntarios = voluntarios.map(v => v.id === voluntario.id ? voluntario : v);
-    localStorage.setItem(this.key, JSON.stringify(voluntarios));
-  }
-
-  // Eliminar un voluntario por ID
-  deleteVoluntario(id: number): void {
+  getVoluntarioById(id: number) {
     const voluntarios = this.getVoluntarios();
-    const filteredVoluntarios = voluntarios.filter(v => v.id !== id);
-    localStorage.setItem(this.key, JSON.stringify(filteredVoluntarios));
+    return voluntarios.find((v: any) => v.id === id);
+  }
+
+  updateVoluntario(voluntario: any) {
+    const voluntarios = this.getVoluntarios();
+    const index = voluntarios.findIndex((v: any) => v.id === voluntario.id);
+    voluntarios[index] = voluntario;
+    localStorage.setItem(this.storageKey, JSON.stringify(voluntarios));
+  }
+
+  deleteVoluntario(id: number) {
+    let voluntarios = this.getVoluntarios();
+    voluntarios = voluntarios.filter((v: any) => v.id !== id);
+    localStorage.setItem(this.storageKey, JSON.stringify(voluntarios));
   }
 }

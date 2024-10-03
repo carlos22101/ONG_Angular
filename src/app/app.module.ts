@@ -1,21 +1,30 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';  // Asegúrate de importar RouterModule
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router'; 
 import { AppComponent } from './app.component';
-import { VoluntariosListComponent } from './features/voluntarios/list/list.component'; // Asegúrate de importar este componente
+import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { VoluntariosListComponent } from './features/voluntarios/list/list.component';
 import { VoluntariosFormComponent } from './features/voluntarios/form/form.component';
+import { ProyectosListComponent } from './features/proyectos/list/list.component';
+import { ProyectosFormComponent } from './features/proyectos/form/form.component';
+
+import { AppRoutingModule } from './app-routing.module'; 
 
 @NgModule({
   declarations: [
     AppComponent,
-    VoluntariosListComponent,  // Asegúrate de declarar el componente de la lista de voluntarios
-    VoluntariosFormComponent
+    DashboardComponent,
+    VoluntariosListComponent,
+    VoluntariosFormComponent,
+    ProyectosListComponent,
+    ProyectosFormComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot([]),  // Asegúrate de que RouterModule esté en los imports
-    FormsModule
+    FormsModule,
+    AppRoutingModule, // Asegúrate de incluir el AppRoutingModule
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

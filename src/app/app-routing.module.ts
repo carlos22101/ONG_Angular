@@ -9,6 +9,7 @@ import { ProyectosFormComponent } from './features/proyectos/form/form.component
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  {path: "", component: DashboardComponent},
   { path: 'dashboard', component: DashboardComponent },
   { path: 'voluntarios', component: VoluntariosListComponent },
   { path: 'voluntarios/add', component: VoluntariosFormComponent },

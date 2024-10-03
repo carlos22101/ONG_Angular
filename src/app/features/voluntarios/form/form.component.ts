@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router'; 
 import { VoluntariosService } from '../../../core/voluntarios.service';
 import { Voluntario } from '../../../models/voluntario';
 
@@ -9,39 +9,43 @@ import { Voluntario } from '../../../models/voluntario';
   styleUrls: ['./form.component.css']
 })
 export class VoluntariosFormComponent implements OnInit {
+
   voluntario: Voluntario = {
-    id: 0,
+    id: 0, // Valor inicial temporal
     nombre: '',
     apellido: '',
     correo: '',
     areaInteres: '',
     disponibilidadHoraria: '',
     cuotaHoras: 0,
-    estado: 'Activo'
+    estado: 'activo' // Estado predeterminado
   };
 
   isEdit: boolean = false;
 
   constructor(
-    private voluntariosService: VoluntariosService,
-    private route: ActivatedRoute,
-    private router: Router
+    private voluntarioService: VoluntariosService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params['id'];
+    const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.voluntario = this.voluntariosService.getVoluntarios().find(v => v.id == id) || this.voluntario;
       this.isEdit = true;
+      const storedVoluntarios = this.voluntarioService.getVoluntarios();
+      const voluntario = storedVoluntarios.find((v: Voluntario) => v.id === +id);
+      if (voluntario) {
+        this.voluntario = voluntario;
+      }
     }
   }
 
   onSubmit(): void {
     if (this.isEdit) {
-      this.voluntariosService.updateVoluntario(this.voluntario);
+      this.voluntarioService.updateVoluntario(this.voluntario);
     } else {
-      this.voluntario.id = Date.now();  // Generar un ID único
-      this.voluntariosService.addVoluntario(this.voluntario);
+      this.voluntarioService.addVoluntario(this.voluntario);
     }
     this.router.navigate(['/voluntarios']);
   }
