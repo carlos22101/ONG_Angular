@@ -10,6 +10,7 @@
           <th>Correo</th>
           <th>Área de Interés</th>
           <th>Disponibilidad</th>
+          <th>cuotaHoras</th>
           <th>Acciones</th>
         </tr>
       </thead>
@@ -20,6 +21,7 @@
           <td>{{ voluntario.correo }}</td>
           <td>{{ voluntario.areaInteres }}</td>
           <td>{{ voluntario.disponibilidadHoraria }}</td>
+          <td>{{voluntario.cuotaHoras}}</td>
           <td>
             <button [routerLink]="['/voluntarios/edit', voluntario.id]" class="btn btn-primary">
               Editar

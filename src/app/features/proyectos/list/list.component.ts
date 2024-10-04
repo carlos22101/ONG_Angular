@@ -19,7 +19,7 @@ export class ProyectosListComponent implements OnInit {
     const confirmDelete = confirm('¿Estás seguro de que deseas eliminar este proyecto?');
     if (confirmDelete) {
       this.proyectoService.deleteProyecto(id);
-      this.proyectos = this.proyectoService.getProyectos(); // Actualizar la lista después de eliminar
+      this.proyectos = this.proyectoService.getProyectos(); 
     }
   }
 }

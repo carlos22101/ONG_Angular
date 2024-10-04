@@ -11,14 +11,14 @@ import { Voluntario } from '../../../models/voluntario';
 export class VoluntariosFormComponent implements OnInit {
 
   voluntario: Voluntario = {
-    id: 0, // Valor inicial temporal
+    id: 0, 
     nombre: '',
     apellido: '',
     correo: '',
     areaInteres: '',
     disponibilidadHoraria: '',
     cuotaHoras: 0,
-    estado: 'activo' // Estado predeterminado
+    estado: 'activo' 
   };
 
   isEdit: boolean = false;
