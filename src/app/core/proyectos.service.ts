@@ -1,39 +1,54 @@
 import { Injectable } from '@angular/core';
+import { Proyecto } from '../models/proyecto';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class ProyectosService {
-  private storageKey = 'proyectos';
+export class ProyectoService {
+  private proyectosKey = 'proyectos';
 
-  constructor() { }
+  constructor() {}
 
-  getProyectos() {
-    const proyectos = localStorage.getItem(this.storageKey);
+  // Obtener todos los proyectos
+  getProyectos(): Proyecto[] {
+    const proyectos = localStorage.getItem(this.proyectosKey);
     return proyectos ? JSON.parse(proyectos) : [];
   }
 
-  addProyecto(proyecto: any) {
+  // Obtener un proyecto por ID
+  getProyectoById(id: number): Proyecto | undefined {
     const proyectos = this.getProyectos();
+    return proyectos.find((p) => p.id_proyecto === id);
+  }
+
+  // Agregar un nuevo proyecto
+  addProyecto(proyecto: Proyecto): void {
+    const proyectos = this.getProyectos();
+    proyecto.id_proyecto = this.generateId();
     proyectos.push(proyecto);
-    localStorage.setItem(this.storageKey, JSON.stringify(proyectos));
+    localStorage.setItem(this.proyectosKey, JSON.stringify(proyectos));
   }
 
-  getProyectoById(id: number) {
+  // Actualizar un proyecto existente
+  updateProyecto(proyecto: Proyecto): void {
     const proyectos = this.getProyectos();
-    return proyectos.find((p: any) => p.id === id);
+    const index = proyectos.findIndex((p) => p.id_proyecto === proyecto.id_proyecto);
+    if (index !== -1) {
+      proyectos[index] = proyecto;
+      localStorage.setItem(this.proyectosKey, JSON.stringify(proyectos));
+    }
   }
 
-  updateProyecto(proyecto: any) {
+  // Eliminar un proyecto
+  deleteProyecto(id: number): void {
     const proyectos = this.getProyectos();
-    const index = proyectos.findIndex((p: any) => p.id === proyecto.id);
-    proyectos[index] = proyecto;
-    localStorage.setItem(this.storageKey, JSON.stringify(proyectos));
+    const filtered = proyectos.filter((p) => p.id_proyecto !== id);
+    localStorage.setItem(this.proyectosKey, JSON.stringify(filtered));
   }
 
-  deleteProyecto(id: number) {
-    let proyectos = this.getProyectos();
-    proyectos = proyectos.filter((p: any) => p.id !== id);
-    localStorage.setItem(this.storageKey, JSON.stringify(proyectos));
+  // Generar un ID para nuevos proyectos
+  private generateId(): number {
+    const proyectos = this.getProyectos();
+    return proyectos.length > 0 ? Math.max(...proyectos.map((p) => p.id_proyecto)) + 1 : 1;
   }
 }

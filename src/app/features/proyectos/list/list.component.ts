@@ -1,9 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ProyectoService } from '../../../core/proyectos.service';
+import { Proyecto } from '../../../models/proyecto';
 
 @Component({
   selector: 'app-proyectos-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css']
 })
-export class ProyectosListComponent { }
+export class ProyectosListComponent implements OnInit {
+  proyectos: Proyecto[] = [];
 
+  constructor(private proyectoService: ProyectoService) {}
+
+  ngOnInit(): void {
+    this.proyectos = this.proyectoService.getProyectos();
+  }
+
+  deleteProyecto(id: number): void {
+    const confirmDelete = confirm('¿Estás seguro de que deseas eliminar este proyecto?');
+    if (confirmDelete) {
+      this.proyectoService.deleteProyecto(id);
+      this.proyectos = this.proyectoService.getProyectos(); // Actualizar la lista después de eliminar
+    }
+  }
+}
