@@ -1,0 +1,29 @@
+<table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Voluntario ID</th>
+        <th>Proyecto ID</th>
+        <th>Fecha de Asignación</th>
+        <th>Horas Trabajadas</th>
+        <th>Evaluación</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let asignacion of asignaciones">
+        <td>{{ asignacion.id }}</td>
+        <td>{{ asignacion.voluntario_id }}</td>
+        <td>{{ asignacion.proyecto_id }}</td>
+        <td>{{ asignacion.fecha_asignacion }}</td>
+        <td>{{ asignacion.horas_trabajadas }}</td>
+        <td>{{ asignacion.evaluacion }}</td>
+        <td>
+          <button [routerLink]="['/asignaciones/edit', asignacion.id]">Editar</button>
+          <button (click)="deleteAsignacion(asignacion.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button [routerLink]="['/asignaciones/add']">Agregar Asignación</button>
+  

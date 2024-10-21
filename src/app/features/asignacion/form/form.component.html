@@ -1,0 +1,28 @@
+<form (ngSubmit)="onSubmit()">
+    <div>
+      <label for="voluntario_id">Voluntario ID:</label>
+      <input [(ngModel)]="asignacion.voluntario_id" name="voluntario_id" required />
+    </div>
+    <div>
+      <label for="proyecto_id">Proyecto ID:</label>
+      <input [(ngModel)]="asignacion.proyecto_id" name="proyecto_id" required />
+    </div>
+    <div>
+      <label for="fecha_asignacion">Fecha de Asignación:</label>
+      <input [(ngModel)]="asignacion.fecha_asignacion" name="fecha_asignacion" type="date" required />
+    </div>
+    <div>
+      <label for="horas_trabajadas">Horas Trabajadas:</label>
+      <input [(ngModel)]="asignacion.horas_trabajadas" name="horas_trabajadas" type="number" required />
+    </div>
+    <div>
+      <label for="evaluacion">Evaluación:</label>
+      <input [(ngModel)]="asignacion.evaluacion" name="evaluacion" required />
+    </div>
+    <div>
+      <label for="comentarios">Comentarios:</label>
+      <textarea [(ngModel)]="asignacion.comentarios" name="comentarios"></textarea>
+    </div>
+    <button type="submit">Guardar</button>
+  </form>
+  

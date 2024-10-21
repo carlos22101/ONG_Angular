@@ -3,6 +3,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>ID</th>
       <th>Nombre</th>
       <th>Descripción</th>
       <th>Responsable</th>
@@ -14,6 +15,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let proyecto of proyectos">
+      <td>{{ proyecto.id_proyecto }}</td>
       <td>{{ proyecto.nombre }}</td>
       <td>{{ proyecto.descripcion }}</td>
       <td>{{ proyecto.responsable }}</td>
