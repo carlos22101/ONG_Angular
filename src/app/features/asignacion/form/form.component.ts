@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { AsignacionService } from '../../asignacion/asignacion.service';
 import { Asignacion } from '../../asignacion/asignacion.model';
 
@@ -20,7 +20,21 @@ export class FormComponent {
     comentarios: '',
   };
 
-  constructor(private asignacionService: AsignacionService, private router: Router) {}
+  constructor(private asignacionService: AsignacionService, private router: Router, private route : ActivatedRoute) {}
+  ngOnInit(): void {
+    const id = +this.route.snapshot.paramMap.get('id')!;
+    if (id) {
+      // Si hay un id en la ruta, cargamos la asignación para editar
+      this.asignacionService.getAsignacionById(id).subscribe(
+        (asignacion) => {
+          this.asignacion = asignacion;
+        },
+        (error) => {
+          console.error('Error al obtener la asignación:', error);
+        }
+      );
+    }
+  }
 
   onSubmit() {
     if (this.asignacion.id) {

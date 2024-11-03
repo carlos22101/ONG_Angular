@@ -9,6 +9,7 @@
         <th>Horas semanales</th>
         <th>horas mensuales</th>
         <th>Evaluación</th>
+        <th>Comentarios</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -22,6 +23,7 @@
         <td>{{asignacion.horas_semanales}}</td>
         <td>{{asignacion.horas_mensuales}}</td>
         <td>{{ asignacion.evaluacion }}</td>
+        <td>{{asignacion.comentarios}}</td>
         <td>
           <button [routerLink]="['/asignaciones/edit', asignacion.id]">Editar</button>
           <button (click)="deleteAsignacion(asignacion.id)">Eliminar</button>
