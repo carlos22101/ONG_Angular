@@ -19,17 +19,17 @@
   
       <div class="form-group">
         <label for="areaInteres">Área de Interés</label>
-        <input [(ngModel)]="voluntario.areaInteres" name="areaInteres" type="text" class="form-control">
+        <input [(ngModel)]="voluntario.area_interes" name="areaInteres" type="text" class="form-control">
       </div>
   
       <div class="form-group">
         <label for="disponibilidadHoraria">Disponibilidad Horaria</label>
-        <input [(ngModel)]="voluntario.disponibilidadHoraria" name="disponibilidadHoraria" type="text" class="form-control">
+        <input [(ngModel)]="voluntario.disponibilidad_horaria" name="disponibilidadHoraria" type="text" class="form-control">
       </div>
   
       <div class="form-group">
         <label for="cuotaHoras">Cuota de Horas (semanal/mensual)</label>
-        <input [(ngModel)]="voluntario.cuotaHoras" name="cuotaHoras" type="number" class="form-control">
+        <input [(ngModel)]="voluntario.cuota_horas" name="cuotaHoras" type="number" class="form-control">
       </div>
   
       <button type="submit" class="btn btn-primary">{{ isEdit ? 'Guardar Cambios' : 'Agregar Voluntario' }}</button>

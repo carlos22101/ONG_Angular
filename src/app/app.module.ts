@@ -10,6 +10,7 @@ import { VoluntariosFormComponent } from './features/voluntarios/form/form.compo
 import { ProyectosListComponent } from './features/proyectos/list/list.component';
 import { ProyectosFormComponent } from './features/proyectos/form/form.component';
 import { AsignacionModule } from './features/asignacion/asignacion.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { AsignacionModule } from './features/asignacion/asignacion.module';
     FormsModule, 
     RouterModule, 
     AppRoutingModule,
-    AsignacionModule
+    AsignacionModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -15,9 +15,9 @@ export class VoluntariosFormComponent implements OnInit {
     nombre: '',
     apellido: '',
     correo: '',
-    areaInteres: '',
-    disponibilidadHoraria: '',
-    cuotaHoras: 0,
+    area_interes: '',
+    disponibilidad_horaria: '',
+    cuota_horas: 0,
     estado: 'activo' 
   };
 
@@ -33,21 +33,40 @@ export class VoluntariosFormComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.isEdit = true;
-      const storedVoluntarios = this.voluntarioService.getVoluntarios();
-      const voluntario = storedVoluntarios.find((v: Voluntario) => v.id === +id);
-      if (voluntario) {
-        this.voluntario = voluntario;
-      }
+      // Obtener el voluntario desde la API
+      this.voluntarioService.getVoluntarioById(+id).subscribe({
+        next: (voluntario) => {
+          this.voluntario = voluntario;
+        },
+        error: (err) => {
+          console.error('Error al obtener voluntario:', err);
+        }
+      });
     }
   }
 
   onSubmit(): void {
     if (this.isEdit) {
-      this.voluntarioService.updateVoluntario(this.voluntario);
+      // Actualizar voluntario en la API
+      this.voluntarioService.updateVoluntario(this.voluntario).subscribe({
+        next: () => {
+          this.router.navigate(['/voluntarios']);
+        },
+        error: (err) => {
+          console.error('Error al actualizar voluntario:', err);
+        }
+      });
     } else {
-      this.voluntarioService.addVoluntario(this.voluntario);
+      // Agregar nuevo voluntario en la API
+      this.voluntarioService.addVoluntario(this.voluntario).subscribe({
+        next: () => {
+          this.router.navigate(['/voluntarios']);
+        },
+        error: (err) => {
+          console.error('Error al agregar voluntario:', err);
+        }
+      });
     }
-    this.router.navigate(['/voluntarios']);
   }
 
   cancel(): void {

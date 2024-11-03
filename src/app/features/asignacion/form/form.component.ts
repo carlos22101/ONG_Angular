@@ -24,10 +24,20 @@ export class FormComponent {
 
   onSubmit() {
     if (this.asignacion.id) {
-      this.asignacionService.updateAsignacion(this.asignacion);
+      // Actualizar asignación
+      this.asignacionService.updateAsignacion(this.asignacion).subscribe({
+        next: () => this.router.navigate(['/asignaciones']),
+        error: (err) => console.error('Error al actualizar asignación:', err)
+      });
     } else {
-      this.asignacionService.addAsignacion(this.asignacion);
+      // Agregar nueva asignación
+      this.asignacionService.addAsignacion(this.asignacion).subscribe({
+        next: () => this.router.navigate(['/asignaciones']),
+        error: (err) => console.error('Error al agregar asignación:', err)
+      });
     }
-    this.router.navigate(['/asignaciones']);
+  }
+  cancel():void{
+    this.router.navigate(['/asignaciones'])
   }
 }

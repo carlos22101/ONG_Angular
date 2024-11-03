@@ -1,68 +1,38 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Voluntario } from '../models/voluntario'; 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class VoluntariosService {
-  private storageKey = 'voluntarios';
+  private apiUrl = 'http://localhost:3000/api/voluntarios';
 
-  constructor() { }
+  constructor(private http: HttpClient) {}
 
-  getVoluntarios() {
-    const voluntarios = localStorage.getItem(this.storageKey);
-    if (voluntarios) {
-      return JSON.parse(voluntarios);
-    } else {
-      return [];
-    }
+  // Obtener todos los voluntarios
+  getVoluntarios(): Observable<Voluntario[]> {
+    return this.http.get<Voluntario[]>(this.apiUrl);
   }
 
-  addVoluntario(voluntario: any) {
-    const voluntarios = this.getVoluntarios();
-    voluntario.id = this.generateNewId(voluntarios);
-    voluntarios.push(voluntario);
-    localStorage.setItem(this.storageKey, JSON.stringify(voluntarios));
+  // Agregar un voluntario
+  addVoluntario(voluntario: Voluntario): Observable<Voluntario> {
+    return this.http.post<Voluntario>(this.apiUrl, voluntario);
   }
 
-  getVoluntarioById(id: number) {
-    const voluntarios = this.getVoluntarios();
-    for (let i = 0; i < voluntarios.length; i++) {
-      if (voluntarios[i].id === id) {
-        return voluntarios[i];
-      }
-    }
-    return null;
+  // Obtener un voluntario por ID
+  getVoluntarioById(id: number): Observable<Voluntario> {
+    return this.http.get<Voluntario>(`${this.apiUrl}/${id}`);
   }
 
-  updateVoluntario(voluntario: any) {
-    const voluntarios = this.getVoluntarios();
-    for (let i = 0; i < voluntarios.length; i++) {
-      if (voluntarios[i].id === voluntario.id) {
-        voluntarios[i] = voluntario;
-        break;
-      }
-    }
-    localStorage.setItem(this.storageKey, JSON.stringify(voluntarios));
+  // Actualizar un voluntario
+  updateVoluntario(voluntario: Voluntario): Observable<Voluntario> {
+    return this.http.put<Voluntario>(`${this.apiUrl}/${voluntario.id}`, voluntario);
   }
 
-  deleteVoluntario(id: number) {
-    const voluntarios = this.getVoluntarios();
-    const nuevosVoluntarios = [];
-    for (let i = 0; i < voluntarios.length; i++) {
-      if (voluntarios[i].id !== id) {
-        nuevosVoluntarios.push(voluntarios[i]);
-      }
-    }
-    localStorage.setItem(this.storageKey, JSON.stringify(nuevosVoluntarios));
-  }
-
-  private generateNewId(voluntarios: any[]): number {
-    let maxId = 0;
-    for (let i = 0; i < voluntarios.length; i++) {
-      if (voluntarios[i].id > maxId) {
-        maxId = voluntarios[i].id;
-      }
-    }
-    return maxId + 1;
+  // Eliminar un voluntario por ID
+  deleteVoluntario(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

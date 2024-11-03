@@ -13,9 +13,9 @@ export class ProyectosFormComponent implements OnInit {
     nombre: '',
     descripcion: '',
     responsable: '',
-    fechaInicio: new Date(),
-    fechaFin: new Date(),
-    totalHorasNecesarias: 0,
+    fecha_inicio: new Date(),
+    fecha_fin: new Date(),
+    total_horas_necesarias: 0,
   };
   isEdit = false;
 
@@ -28,21 +28,38 @@ export class ProyectosFormComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      const foundProyecto = this.proyectoService.getProyectoById(+id);
-      if (foundProyecto) {
-        this.proyecto = foundProyecto;
-        this.isEdit = true;
-      }
+      this.proyectoService.getProyectoById(+id).subscribe(
+        (foundProyecto: Proyecto) => {
+          this.proyecto = foundProyecto;
+          this.isEdit = true;
+        },
+        (error) => {
+          console.error('Error al obtener el proyecto:', error);
+        }
+      );
     }
   }
 
   onSubmit(): void {
     if (this.isEdit) {
-      this.proyectoService.updateProyecto(this.proyecto);
+      this.proyectoService.updateProyecto(this.proyecto).subscribe(
+        () => {
+          this.router.navigate(['/proyectos']);
+        },
+        (error) => {
+          console.error('Error al actualizar el proyecto:', error);
+        }
+      );
     } else {
-      this.proyectoService.addProyecto(this.proyecto);
+      this.proyectoService.addProyecto(this.proyecto).subscribe(
+        () => {
+          this.router.navigate(['/proyectos']);
+        },
+        (error) => {
+          console.error('Error al agregar el proyecto:', error);
+        }
+      );
     }
-    this.router.navigate(['/proyectos']);
   }
 
   cancel(): void {

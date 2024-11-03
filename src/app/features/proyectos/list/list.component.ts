@@ -12,14 +12,31 @@ export class ProyectosListComponent implements OnInit {
   constructor(private proyectoService: ProyectoService) {}
 
   ngOnInit(): void {
-    this.proyectos = this.proyectoService.getProyectos();
+    this.loadProyectos();
+  }
+
+  loadProyectos(): void {
+    this.proyectoService.getProyectos().subscribe(
+      (proyectos) => {
+        this.proyectos = proyectos;
+      },
+      (error) => {
+        console.error('Error al cargar los proyectos:', error);
+      }
+    );
   }
 
   deleteProyecto(id: number): void {
     const confirmDelete = confirm('¿Estás seguro de que deseas eliminar este proyecto?');
     if (confirmDelete) {
-      this.proyectoService.deleteProyecto(id);
-      this.proyectos = this.proyectoService.getProyectos(); 
+      this.proyectoService.deleteProyecto(id).subscribe(
+        () => {
+          this.loadProyectos();  // Vuelve a cargar la lista de proyectos después de eliminar
+        },
+        (error) => {
+          console.error('Error al eliminar el proyecto:', error);
+        }
+      );
     }
   }
 }

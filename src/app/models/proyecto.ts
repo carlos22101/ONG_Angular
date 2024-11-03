@@ -3,7 +3,7 @@ export interface Proyecto {
   nombre: string;
   descripcion: string;
   responsable: string;
-  fechaInicio: Date;
-  fechaFin: Date;
-  totalHorasNecesarias: number;
+  fecha_inicio: Date;
+  fecha_fin: Date;
+  total_horas_necesarias: number;
 }

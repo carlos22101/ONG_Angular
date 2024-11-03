@@ -19,9 +19,9 @@
           <td>{{ voluntario.id }}</td>
           <td>{{ voluntario.nombre }} {{ voluntario.apellido }}</td>
           <td>{{ voluntario.correo }}</td>
-          <td>{{ voluntario.areaInteres }}</td>
-          <td>{{ voluntario.disponibilidadHoraria }}</td>
-          <td>{{voluntario.cuotaHoras}}</td>
+          <td>{{ voluntario.area_interes }}</td>
+          <td>{{ voluntario.disponibilidad_horaria }}</td>
+          <td>{{voluntario.cuota_horas}}</td>
           <td>
             <button [routerLink]="['/voluntarios/edit', voluntario.id]" class="btn btn-primary">
               Editar

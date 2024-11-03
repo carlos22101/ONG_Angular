@@ -1,51 +1,33 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Asignacion } from './asignacion.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AsignacionService {
-  private asignaciones: Asignacion[] = [];
+  private apiUrl = 'http://localhost:3000/api/asignaciones';
 
-  constructor() {
-    this.loadFromLocalStorage();
+  constructor(private http: HttpClient) {}
+
+  getAsignaciones(): Observable<Asignacion[]> {
+    return this.http.get<Asignacion[]>(this.apiUrl);
   }
 
-  private saveToLocalStorage() {
-    localStorage.setItem('asignaciones', JSON.stringify(this.asignaciones));
+  addAsignacion(asignacion: Asignacion): Observable<Asignacion> {
+    return this.http.post<Asignacion>(this.apiUrl, asignacion);
   }
 
-  private loadFromLocalStorage() {
-    const data = localStorage.getItem('asignaciones');
-    if (data) {
-      this.asignaciones = JSON.parse(data);
-    }
+  updateAsignacion(asignacion: Asignacion): Observable<Asignacion> {
+    return this.http.put<Asignacion>(`${this.apiUrl}/${asignacion.id}`, asignacion);
   }
 
-  getAsignaciones(): Asignacion[] {
-    return this.asignaciones;
+  deleteAsignacion(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  addAsignacion(asignacion: Asignacion) {
-    asignacion.id = this.asignaciones.length > 0 ? this.asignaciones[this.asignaciones.length - 1].id + 1 : 1;
-    this.asignaciones.push(asignacion);
-    this.saveToLocalStorage();
-  }
-
-  updateAsignacion(asignacion: Asignacion) {
-    const index = this.asignaciones.findIndex(a => a.id === asignacion.id);
-    if (index > -1) {
-      this.asignaciones[index] = asignacion;
-      this.saveToLocalStorage();
-    }
-  }
-
-  deleteAsignacion(id: number) {
-    this.asignaciones = this.asignaciones.filter(a => a.id !== id);
-    this.saveToLocalStorage();
-  }
-
-  getAsignacionById(id: number): Asignacion | undefined {
-    return this.asignaciones.find(a => a.id === id);
+  getAsignacionById(id: number): Observable<Asignacion> {
+    return this.http.get<Asignacion>(`${this.apiUrl}/${id}`);
   }
 }

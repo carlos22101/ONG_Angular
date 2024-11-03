@@ -19,9 +19,9 @@
       <td>{{ proyecto.nombre }}</td>
       <td>{{ proyecto.descripcion }}</td>
       <td>{{ proyecto.responsable }}</td>
-      <td>{{ proyecto.fechaInicio | date }}</td>
-      <td>{{ proyecto.fechaFin | date }}</td>
-      <td>{{ proyecto.totalHorasNecesarias }}</td>
+      <td>{{ proyecto.fecha_inicio | date }}</td>
+      <td>{{ proyecto.fecha_fin | date }}</td>
+      <td>{{ proyecto.total_horas_necesarias }}</td>
       <td>
         <button [routerLink]="['/proyectos/edit', proyecto.id_proyecto]" class="btn btn-sm btn-primary">Editar</button>
         <button (click)="deleteProyecto(proyecto.id_proyecto)" class="btn btn-sm btn-danger">Eliminar</button>

@@ -3,8 +3,8 @@ export interface Voluntario {
   nombre: string;
   apellido: string;
   correo: string;
-  areaInteres: string;
-  disponibilidadHoraria: string;
-  cuotaHoras: number;
+  area_interes: string;
+  disponibilidad_horaria: string;
+  cuota_horas: number;
   estado: string; 
 }

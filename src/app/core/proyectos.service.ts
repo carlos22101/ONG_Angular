@@ -1,54 +1,38 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Proyecto } from '../models/proyecto';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProyectoService {
-  private proyectosKey = 'proyectos';
+  private apiUrl = 'http://localhost:3000/api/proyectos'; // Ajusta la URL según tu API
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  
-  getProyectos(): Proyecto[] {
-    const proyectos = localStorage.getItem(this.proyectosKey);
-    return proyectos ? JSON.parse(proyectos) : [];
+  // Obtener todos los proyectos
+  getProyectos(): Observable<Proyecto[]> {
+    return this.http.get<Proyecto[]>(this.apiUrl);
   }
 
-  
-  getProyectoById(id: number): Proyecto | undefined {
-    const proyectos = this.getProyectos();
-    return proyectos.find((p) => p.id_proyecto === id);
+  // Obtener proyecto por ID
+  getProyectoById(id: number): Observable<Proyecto> {
+    return this.http.get<Proyecto>(`${this.apiUrl}/${id}`);
   }
 
-  
-  addProyecto(proyecto: Proyecto): void {
-    const proyectos = this.getProyectos();
-    proyecto.id_proyecto = this.generateId();
-    proyectos.push(proyecto);
-    localStorage.setItem(this.proyectosKey, JSON.stringify(proyectos));
+  // Añadir un nuevo proyecto
+  addProyecto(proyecto: Proyecto): Observable<Proyecto> {
+    return this.http.post<Proyecto>(this.apiUrl, proyecto);
   }
 
-
-  updateProyecto(proyecto: Proyecto): void {
-    const proyectos = this.getProyectos();
-    const index = proyectos.findIndex((p) => p.id_proyecto === proyecto.id_proyecto);
-    if (index !== -1) {
-      proyectos[index] = proyecto;
-      localStorage.setItem(this.proyectosKey, JSON.stringify(proyectos));
-    }
+  // Actualizar un proyecto existente
+  updateProyecto(proyecto: Proyecto): Observable<Proyecto> {
+    return this.http.put<Proyecto>(`${this.apiUrl}/${proyecto.id_proyecto}`, proyecto);
   }
 
-  
-  deleteProyecto(id: number): void {
-    const proyectos = this.getProyectos();
-    const filtered = proyectos.filter((p) => p.id_proyecto !== id);
-    localStorage.setItem(this.proyectosKey, JSON.stringify(filtered));
-  }
-
-
-  private generateId(): number {
-    const proyectos = this.getProyectos();
-    return proyectos.length > 0 ? Math.max(...proyectos.map((p) => p.id_proyecto)) + 1 : 1;
+  // Eliminar un proyecto por ID
+  deleteProyecto(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

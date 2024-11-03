@@ -6,6 +6,8 @@
         <th>Proyecto ID</th>
         <th>Fecha de Asignación</th>
         <th>Horas Trabajadas</th>
+        <th>Horas semanales</th>
+        <th>horas mensuales</th>
         <th>Evaluación</th>
         <th>Acciones</th>
       </tr>
@@ -17,6 +19,8 @@
         <td>{{ asignacion.proyecto_id }}</td>
         <td>{{ asignacion.fecha_asignacion }}</td>
         <td>{{ asignacion.horas_trabajadas }}</td>
+        <td>{{asignacion.horas_semanales}}</td>
+        <td>{{asignacion.horas_mensuales}}</td>
         <td>{{ asignacion.evaluacion }}</td>
         <td>
           <button [routerLink]="['/asignaciones/edit', asignacion.id]">Editar</button>

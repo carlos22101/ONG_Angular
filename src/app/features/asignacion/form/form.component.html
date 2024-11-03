@@ -16,6 +16,14 @@
       <input [(ngModel)]="asignacion.horas_trabajadas" name="horas_trabajadas" type="number" required />
     </div>
     <div>
+      <label for="horas_semanales">Horas semanales:</label>
+      <input [(ngModel)]="asignacion.horas_semanales" name="horas_semanales" type="number" required />
+    </div>
+    <div>
+      <label for="horas_mensuales">Horas mensuales:</label>
+      <input [(ngModel)]="asignacion.horas_mensuales" name="horas_mensuales" type="number" required />
+    </div>
+    <div>
       <label for="evaluacion">Evaluación:</label>
       <input [(ngModel)]="asignacion.evaluacion" name="evaluacion" required />
     </div>
@@ -24,5 +32,6 @@
       <textarea [(ngModel)]="asignacion.comentarios" name="comentarios"></textarea>
     </div>
     <button type="submit">Guardar</button>
+    <button type="button" (click)="cancel()">Cancelar</button>
   </form>
   
