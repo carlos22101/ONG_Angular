@@ -1,37 +1,40 @@
+<link rel="stylesheet" href="form.component.css">
+<div class="container">
 <form (ngSubmit)="onSubmit()">
-    <div>
+    <div class="form-group">
       <label for="voluntario_id">Voluntario ID:</label>
-      <input [(ngModel)]="asignacion.voluntario_id" name="voluntario_id" required />
+      <input [(ngModel)]="asignacion.voluntario_id" name="voluntario_id" type="number" class="form-control" required />
     </div>
-    <div>
+    <div class="form-group">
       <label for="proyecto_id">Proyecto ID:</label>
-      <input [(ngModel)]="asignacion.proyecto_id" name="proyecto_id" required />
+      <input [(ngModel)]="asignacion.proyecto_id" name="proyecto_id" type="number" class="form-control" required />
     </div>
-    <div>
+    <div class="form-group">
       <label for="fecha_asignacion">Fecha de Asignación:</label>
-      <input [(ngModel)]="asignacion.fecha_asignacion" name="fecha_asignacion" type="date" required />
+      <input [(ngModel)]="asignacion.fecha_asignacion" name="fecha_asignacion" type="date" class="form-control" required />
     </div>
-    <div>
+    <div class="form-group">
       <label for="horas_trabajadas">Horas Trabajadas:</label>
       <input [(ngModel)]="asignacion.horas_trabajadas" name="horas_trabajadas" type="number" required />
     </div>
-    <div>
+    <div class="form-group">
       <label for="horas_semanales">Horas semanales:</label>
-      <input [(ngModel)]="asignacion.horas_semanales" name="horas_semanales" type="number" required />
+      <input [(ngModel)]="asignacion.horas_semanales" name="horas_semanales" type="number" class="form-control" required />
     </div>
-    <div>
+    <div class="form-group">
       <label for="horas_mensuales">Horas mensuales:</label>
-      <input [(ngModel)]="asignacion.horas_mensuales" name="horas_mensuales" type="number" required />
+      <input [(ngModel)]="asignacion.horas_mensuales" name="horas_mensuales" type="number" class="form-control" required />
     </div>
-    <div>
+    <div class="form-group">
       <label for="evaluacion">Evaluación:</label>
-      <input [(ngModel)]="asignacion.evaluacion" name="evaluacion" required />
+      <input [(ngModel)]="asignacion.evaluacion" name="evaluacion" type="text" class="form-control" required />
     </div>
-    <div>
+    <div class="form-group">
       <label for="comentarios">Comentarios:</label>
-      <textarea [(ngModel)]="asignacion.comentarios" name="comentarios"></textarea>
+      <textarea [(ngModel)]="asignacion.comentarios" name="comentarios" class="form-control"></textarea>
     </div>
-    <button type="submit">Guardar</button>
+    <button type="submit" class="btn btn-primary" >Guardar</button>
     <button type="button" (click)="cancel()">Cancelar</button>
   </form>
+</div>
   

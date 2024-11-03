@@ -1,6 +1,8 @@
+<link rel="stylesheet" href="list.component.css">
+<div class="container">
 <h2>Lista de Proyectos</h2>
-
-<table class="table-striped">
+<button [routerLink]="['/proyectos/add']" class="btn btn-primary">Agregar Proyecto</button>
+<table class="table">
   <thead>
     <tr>
       <th>ID</th>
@@ -29,5 +31,4 @@
     </tr>
   </tbody>
 </table>
-
-<button [routerLink]="['/proyectos/add']" class="btn btn-success">Agregar Proyecto</button>
+</div>

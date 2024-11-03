@@ -1,6 +1,7 @@
-<h2>{{ isEdit ? 'Editar Proyecto' : 'Agregar Proyecto' }}</h2>
-
-<form (ngSubmit)="onSubmit()">
+<link rel="stylesheet" href="form.component.css">
+<div class="container">
+  <h2>{{ isEdit ? 'Editar Proyecto' : 'Agregar Proyecto' }}</h2>
+  <form (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label for="nombre">Nombre del Proyecto</label>
     <input
@@ -73,4 +74,5 @@
 
   <button type="submit" class="btn btn-primary">{{ isEdit ? 'Guardar Cambios' : 'Agregar Proyecto' }}</button>
   <button type="button" (click)="cancel()" class="btn btn-secondary">Cancelar</button>
-</form>
+  </form>
+</div>
