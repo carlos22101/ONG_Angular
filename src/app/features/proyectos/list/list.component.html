@@ -1,0 +1,33 @@
+<h2>Lista de Proyectos</h2>
+
+<table class="table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Descripción</th>
+      <th>Responsable</th>
+      <th>Fecha de Inicio</th>
+      <th>Fecha de Fin</th>
+      <th>Total de Horas</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let proyecto of proyectos">
+      <td>{{ proyecto.id_proyecto }}</td>
+      <td>{{ proyecto.nombre }}</td>
+      <td>{{ proyecto.descripcion }}</td>
+      <td>{{ proyecto.responsable }}</td>
+      <td>{{ proyecto.fecha_inicio | date }}</td>
+      <td>{{ proyecto.fecha_fin | date }}</td>
+      <td>{{ proyecto.total_horas_necesarias }}</td>
+      <td>
+        <button [routerLink]="['/proyectos/edit', proyecto.id_proyecto]" class="btn btn-sm btn-primary">Editar</button>
+        <button (click)="deleteProyecto(proyecto.id_proyecto)" class="btn btn-sm btn-danger">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<button [routerLink]="['/proyectos/add']" class="btn btn-success">Agregar Proyecto</button>

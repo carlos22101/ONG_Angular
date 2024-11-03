@@ -1,0 +1,76 @@
+<h2>{{ isEdit ? 'Editar Proyecto' : 'Agregar Proyecto' }}</h2>
+
+<form (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="nombre">Nombre del Proyecto</label>
+    <input
+      type="text"
+      id="nombre"
+      [(ngModel)]="proyecto.nombre"
+      name="nombre"
+      required
+      class="form-control"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="descripcion">Descripción</label>
+    <textarea
+      id="descripcion"
+      [(ngModel)]="proyecto.descripcion"
+      name="descripcion"
+      class="form-control"
+    ></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="responsable">Responsable</label>
+    <input
+      type="text"
+      id="responsable"
+      [(ngModel)]="proyecto.responsable"
+      name="responsable"
+      required
+      class="form-control"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="fechaInicio">Fecha de Inicio</label>
+    <input
+      type="date"
+      id="fechaInicio"
+      [(ngModel)]="proyecto.fecha_inicio"
+      name="fechaInicio"
+      required
+      class="form-control"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="fechaFin">Fecha de Fin</label>
+    <input
+      type="date"
+      id="fechaFin"
+      [(ngModel)]="proyecto.fecha_fin"
+      name="fechaFin"
+      required
+      class="form-control"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="totalHorasNecesarias">Total de Horas Necesarias</label>
+    <input
+      type="number"
+      id="totalHorasNecesarias"
+      [(ngModel)]="proyecto.total_horas_necesarias"
+      name="totalHorasNecesarias"
+      required
+      class="form-control"
+    />
+  </div>
+
+  <button type="submit" class="btn btn-primary">{{ isEdit ? 'Guardar Cambios' : 'Agregar Proyecto' }}</button>
+  <button type="button" (click)="cancel()" class="btn btn-secondary">Cancelar</button>
+</form>

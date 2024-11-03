@@ -1,16 +1,34 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms'; 
+import { RouterModule } from '@angular/router'; 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { VoluntariosListComponent } from './features/voluntarios/list/list.component';
+import { VoluntariosFormComponent } from './features/voluntarios/form/form.component';
+import { ProyectosListComponent } from './features/proyectos/list/list.component';
+import { ProyectosFormComponent } from './features/proyectos/form/form.component';
+import { AsignacionModule } from './features/asignacion/asignacion.module';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DashboardComponent,
+    VoluntariosListComponent,
+    VoluntariosFormComponent,
+    ProyectosListComponent,
+    ProyectosFormComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    FormsModule, 
+    RouterModule, 
+    AppRoutingModule,
+    AsignacionModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
