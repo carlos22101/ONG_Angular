@@ -1,13 +1,17 @@
 <link rel="stylesheet" href="form.component.css">
 <div class="container">
-<form (ngSubmit)="onSubmit()">
+  <form (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="voluntario_id">Voluntario ID:</label>
-      <input [(ngModel)]="asignacion.voluntario_id" name="voluntario_id" type="number" class="form-control" required />
+      <label for="voluntario_id">Voluntario:</label>
+      <select [(ngModel)]="asignacion.voluntario_id" name="voluntario_id" class="form-control" required>
+        <option *ngFor="let voluntario of voluntarios" [value]="voluntario.id">{{ voluntario.nombre }}</option>
+      </select>
     </div>
     <div class="form-group">
-      <label for="proyecto_id">Proyecto ID:</label>
-      <input [(ngModel)]="asignacion.proyecto_id" name="proyecto_id" type="number" class="form-control" required />
+      <label for="proyecto_id">Proyecto:</label>
+      <select [(ngModel)]="asignacion.proyecto_id" name="proyecto_id" class="form-control" required>
+        <option *ngFor="let proyecto of proyectos" [value]="proyecto.id_proyecto">{{ proyecto.nombre }}</option>
+      </select>
     </div>
     <div class="form-group">
       <label for="fecha_asignacion">Fecha de Asignación:</label>
