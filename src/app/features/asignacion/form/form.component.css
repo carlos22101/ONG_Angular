@@ -70,3 +70,16 @@ button.btn-secondary {
 button.btn-secondary:hover {
     background-color: #7f8c8d; 
 }
+
+select{
+    width: 100%;
+    border-color: #27ae60;
+    padding: 10px;
+    border-radius: 4px;
+}
+option{
+    width: 100%;
+    border-color: #27ae60;
+    padding: 10px;
+    border-radius: 4px;
+}

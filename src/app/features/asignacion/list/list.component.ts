@@ -24,7 +24,7 @@ export class ListComponent implements OnInit {
 
   deleteAsignacion(id: number): void {
     this.asignacionService.deleteAsignacion(id).subscribe({
-      next: () => this.loadAsignaciones(), // Recargar la lista después de eliminar
+      next: () => this.loadAsignaciones(), 
       error: (err) => console.error('Error al eliminar asignación:', err)
     });
   }
