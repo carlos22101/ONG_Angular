@@ -7,7 +7,7 @@ import { Proyecto } from '../models/proyecto';
   providedIn: 'root',
 })
 export class ProyectoService {
-  private apiUrl = 'http://localhost:3000/api/proyectos'; // Ajusta la URL según tu API
+  private apiUrl = 'http://52.70.189.53:3000/api/proyectos'; // Ajusta la URL según tu API
 
   constructor(private http: HttpClient) {}
 
