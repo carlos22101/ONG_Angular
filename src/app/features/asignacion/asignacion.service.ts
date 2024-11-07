@@ -7,7 +7,7 @@ import { Asignacion } from './asignacion.model';
   providedIn: 'root',
 })
 export class AsignacionService {
-  private apiUrl = 'http://localhost:3000/api/asignaciones';
+  private apiUrl = 'http://52.70.189.53:3000/api/asignaciones';
 
   constructor(private http: HttpClient) {}
 
